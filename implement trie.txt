@@ -1,0 +1,56 @@
+from sys import stdin,setrecursionlimit
+setrecursionlimit(10**7)
+    
+class Trie :
+
+    def __init__(self) :
+        self.root={}
+    
+    def insert(self, word) :
+        t=self.root
+        for i in word:
+            if i not in t:
+                t[i]={}
+            t=t[i]
+        t["-"]=True
+
+    def search(self, word) :
+        t=self.root
+        for i in word:
+            if i not in t:
+                return False
+            t=t[i]
+        return '-' in t
+    def startWith(self, prefix) :
+        t=self.root
+        for i in prefix:
+            if i not in t:
+                return False
+            t=t[i]
+        return True
+# main
+t = int(input().strip())
+root = Trie()
+for i in range(t) :
+
+    q_str = stdin.readline().strip().split(" ")
+    q = int(q_str[0].strip())
+    str1 = q_str[1].strip()
+
+    if(q == 1) :
+        root.insert(str1)
+    
+    elif (q == 2) :
+        if(root.search(str1)) :
+            print("true") 
+
+        else :
+            print("false")
+        
+    else :
+        if(root.startWith(str1)) :
+            print("true")
+
+        else :
+            print("false")
+
