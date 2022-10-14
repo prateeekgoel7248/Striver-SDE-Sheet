@@ -1,24 +1,27 @@
-from os import *
-from sys import *
-from collections import *
-from math import *
+void DeleteLast() {
+  if (head == nullptr)
+    cout << "There are no nodes to delete in LinkedList" << endl;
 
-# Following is the List Node Class
-class LinkedListNode:
-    def __init__(self, data):
+  // If there is single node, delete that and make head point to null
+  if (head -> next == nullptr) {
+    delete head;
+    head = nullptr;
+  } else {
 
-        self.data = data
-        self.next = None
+    // step1: Finding First and Second Last Node in LinkedList
 
-    def __del__(self):
-        if(self.next):
-            del self.next
+    ListNode * curr = head, * prev = nullptr;
+    while (curr -> next != nullptr) {
+      prev = curr;
+      curr = curr -> next;
+    }
 
-def deleteNode(node):
-    # Write your code here.
-    if node.next:
-        node.data=node.next.data
-        node.next=node.next.next
-    else:
-        node=None
-    
+    // Step2 : Pointing prev->next to nullptr
+
+    prev -> next = nullptr;
+
+    // Step3 :Deleting the LastNode
+
+    delete curr;
+  }
+}
